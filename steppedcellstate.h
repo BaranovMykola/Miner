@@ -8,6 +8,7 @@ class SteppedCellState : public AbstractCellState
 public:
     void clickOn(Cell& obj);
     void changeCell(Cell& obj, int toSize);
+    void hintCell(Cell&obj);
 };
 
 #endif // STEPPEDCELLSTATE_H

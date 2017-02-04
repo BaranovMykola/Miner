@@ -12,7 +12,7 @@
 #include "abstractcellstate.h"
 #include "basiccellstate.h"
 
-enum ImageType{Basic, Empty, One, Two, Three, Four, Five, Six, Seven, Eight, Flag, Mine, Quastion};
+enum ImageType{Basic, Flag, Quastion, Empty, One, Two, Three, Four, Five, Six, Seven, Eight, Mine};
 const QString ResourcePrefix = ":/cells/resources/%1.png";
 const std::map<ImageType, QString> GraphicsFile =
 {
@@ -49,13 +49,17 @@ public:
     virtual void leaveEvent(QEvent *event) override;
     virtual void mousePressEvent(QMouseEvent* event) override;
     void show();
+    void setMine(bool mine);
+    bool isMine()const;
 signals:
 public slots:
 
 private:
-
+    void updateGrpahic();
     void resizeCell(int toSize);
 
+    bool mMine;
+    ImageType mTypeCell;
     QLabel mGraphic;
     std::unique_ptr<AbstractCellState> state;
 };

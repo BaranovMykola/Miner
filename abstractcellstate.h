@@ -29,6 +29,7 @@ public:
 //    virtual ~AbstractCellState();
     virtual void clickOn(Cell& obj)=0;
     virtual void changeCell(Cell& obj, int toSize)=0;
+    virtual void hintCell(Cell&obj)=0;
 };
 
 #endif // ABSTRACTCELLSTATE_H

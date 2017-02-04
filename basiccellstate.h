@@ -22,12 +22,15 @@
 
 #include "abstractcellstate.h"
 
+#include "cell.h"
+
 class BasicCellState : public AbstractCellState
 {
 public:
 //    BasicCellState();
     void clickOn(Cell &obj);
     void changeCell(Cell& obj, int toSize);
+    void hintCell(Cell& obj);
 };
 
 #endif // BASICCELLSTATE_H

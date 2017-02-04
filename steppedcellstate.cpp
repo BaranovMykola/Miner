@@ -9,3 +9,8 @@ void SteppedCellState::changeCell(Cell &obj, int toSize)
 {
 
 }
+
+void SteppedCellState::hintCell(Cell &obj)
+{
+
+}

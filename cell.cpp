@@ -2,40 +2,57 @@
 
 #include <QDebug>
 #include <QEvent>
+#include <QMouseEvent>
 
 
-
-Cell::Cell(QWidget *parent) : QWidget(parent)
+Cell::Cell(QWidget *parent) : QWidget(parent),
+    mTypeCell(ImageType::Basic)
 {
     mGraphic.setParent(this);
-    mGraphic.setPixmap(QPixmap(GraphicsFile.at(ImageType::Basic)));
-//    connect(this, SIGNAL(signalHoveredOn()), this, SLOT(slotHovered()), Qt::UniqueConnection);
+    updateGrpahic();
     state = std::make_unique<BasicCellState>(BasicCellState());
-//    new BasicCellState;
 }
 
 void Cell::enterEvent(QEvent *event)
 {
-    qDebug() << "Mouse enter";
-//    resizeCell(MinimizeCellSize);
     state->changeCell(*this, MinimizeCellSize);
 }
 
 void Cell::leaveEvent(QEvent *event)
 {
-    qDebug() << "Mouse leave";
-//    resizeCell(RealCellSize);
     state->changeCell(*this, RealCellSize);
 }
 
 void Cell::mousePressEvent(QMouseEvent *event)
 {
-    state->clickOn(*this);
+    if(event->button() == Qt::LeftButton)
+    {
+        state->clickOn(*this);
+    }
+    else
+    {
+        state->hintCell(*this);
+    }
 }
 
 void Cell::show()
 {
     mGraphic.show();
+}
+
+void Cell::setMine(bool mine)
+{
+    mMine = mine;
+}
+
+bool Cell::isMine() const
+{
+    return mMine;
+}
+
+void Cell::updateGrpahic()
+{
+    mGraphic.setPixmap(QPixmap(GraphicsFile.at(mTypeCell)));
 }
 
 void Cell::resizeCell(int toSize)
