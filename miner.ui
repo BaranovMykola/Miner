@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>611</width>
-    <height>423</height>
+    <width>361</width>
+    <height>384</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,11 +19,11 @@
      <rect>
       <x>11</x>
       <y>11</y>
-      <width>591</width>
+      <width>341</width>
       <height>36</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="sunLayout">
      <item>
       <widget class="QLCDNumber" name="lcdNumber_2"/>
      </item>
@@ -45,16 +45,20 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="verticalLayoutWidget">
+   <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>50</y>
-      <width>591</width>
-      <height>331</height>
+      <width>341</width>
+      <height>301</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="fieldBox"/>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <layout class="QVBoxLayout" name="fieldBox"/>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -62,7 +66,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>611</width>
+     <width>361</width>
      <height>26</height>
     </rect>
    </property>

@@ -5,7 +5,7 @@
 
 #include "gridfield.h"
 
-const int CellsDistance = 1;
+const int CellsDistance = 8;
 
 namespace Ui {
 class Miner;
