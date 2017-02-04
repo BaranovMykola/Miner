@@ -7,6 +7,10 @@
 #include <QString>
 
 #include <map>
+#include <memory>
+
+#include "abstractcellstate.h"
+#include "basiccellstate.h"
 
 enum ImageType{Basic, Empty, One, Two, Three, Four, Five, Six, Seven, Eight, Flag, Mine, Quastion};
 const QString ResourcePrefix = ":/cells/resources/%1.png";
@@ -33,6 +37,7 @@ const int MinimizeCellSize = 28;
 class Cell : public QWidget
 {
     Q_OBJECT
+    friend class BasicCellState;
 public:
 
 //    const std::initializer_list<std::pair<ImageType, QString>>
@@ -42,6 +47,7 @@ public:
     explicit Cell(QWidget *parent = 0);
     virtual void enterEvent(QEvent* event) override;
     virtual void leaveEvent(QEvent *event) override;
+    virtual void mousePressEvent(QMouseEvent* event) override;
     void show();
 signals:
 public slots:
@@ -51,6 +57,7 @@ private:
     void resizeCell(int toSize);
 
     QLabel mGraphic;
+    std::unique_ptr<AbstractCellState> state;
 };
 
 #endif // CELL_H
