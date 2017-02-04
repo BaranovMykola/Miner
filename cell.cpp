@@ -8,8 +8,8 @@
 Cell::Cell(QWidget *parent) : QWidget(parent)
 {
     mGraphic.setParent(this);
-    mGraphic.setPixmap(QPixmap(GraphicsFile.at(ImageType::Seven)));
-    connect(this, SIGNAL(signalHoveredOn()), this, SLOT(slotHovered()), Qt::UniqueConnection);
+    mGraphic.setPixmap(QPixmap(GraphicsFile.at(ImageType::Basic)));
+//    connect(this, SIGNAL(signalHoveredOn()), this, SLOT(slotHovered()), Qt::UniqueConnection);
     state = std::make_unique<BasicCellState>(BasicCellState());
 //    new BasicCellState;
 }
