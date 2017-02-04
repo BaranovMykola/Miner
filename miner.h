@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 
+#include "gridfield.h"
+
+const int CellsDistance = 8;
+
 namespace Ui {
 class Miner;
 }
@@ -17,6 +21,7 @@ public:
 
 private:
     Ui::Miner *ui;
+    GridField mMineField;
 };
 
 #endif // MINER_H

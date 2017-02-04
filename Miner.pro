@@ -24,11 +24,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        miner.cpp
+        miner.cpp \
+    cell.cpp \
+    abstractcellstate.cpp \
+    basiccellstate.cpp \
+    steppedcellstate.cpp \
+    gridfield.cpp
 
-HEADERS  += miner.h
+HEADERS  += miner.h \
+    cell.h \
+    abstractcellstate.h \
+    basiccellstate.h \
+    steppedcellstate.h \
+    gridfield.h
 
 FORMS    += miner.ui
 
 RESOURCES += \
     resources.qrc
+
+CONFIG += c++14
