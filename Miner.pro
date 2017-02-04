@@ -24,9 +24,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        miner.cpp
+        miner.cpp \
+    cell.cpp
 
-HEADERS  += miner.h
+HEADERS  += miner.h \
+    cell.h
 
 FORMS    += miner.ui
 
