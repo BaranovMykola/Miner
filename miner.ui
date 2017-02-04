@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>361</width>
+    <width>358</width>
     <height>384</height>
    </rect>
   </property>
@@ -23,12 +23,44 @@
       <height>36</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="sunLayout">
-     <item>
-      <widget class="QLCDNumber" name="lcdNumber_2"/>
+    <layout class="QGridLayout" name="gridLayout_2" rowstretch="0">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
+     <item row="0" column="2">
+      <widget class="QLCDNumber" name="lcdNumber">
+       <property name="minimumSize">
+        <size>
+         <width>108</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
      </item>
-     <item>
+     <item row="0" column="0">
+      <widget class="QLCDNumber" name="lcdNumber_2">
+       <property name="minimumSize">
+        <size>
+         <width>108</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
       <widget class="QLabel" name="sun">
+       <property name="minimumSize">
+        <size>
+         <width>108</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>34</height>
+        </size>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -39,9 +71,6 @@
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
-     </item>
-     <item>
-      <widget class="QLCDNumber" name="lcdNumber"/>
      </item>
     </layout>
    </widget>
@@ -66,7 +95,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>361</width>
+     <width>358</width>
      <height>26</height>
     </rect>
    </property>
