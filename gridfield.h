@@ -17,7 +17,14 @@ class GridField : public QWidget
 public:
     explicit GridField(QWidget* parent = 0);
     QVBoxLayout *getField();
+    void setMine(int count);
+    void updateBesideCells(int w, int h);
+public slots:
+    void slotStepOn(Cell* _cell);
+    void slotTest();
 private:
+    bool isCorrect(int w, int h);
+    std::pair<int, int> getPosition(Cell* _cell);
     std::vector<std::vector<Cell*>> cells;
     QVBoxLayout mField;
 };

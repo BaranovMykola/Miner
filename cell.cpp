@@ -7,7 +7,7 @@
 
 Cell::Cell(QWidget *parent) : QWidget(parent),
     mTypeCell(ImageType::Basic),
-    mMineBehind(0),
+    mMineBeside(0),
     mMine(false)
 {
     mGraphic.setParent(this);
@@ -30,6 +30,7 @@ void Cell::mousePressEvent(QMouseEvent *event)
     if(event->button() == Qt::LeftButton)
     {
         state->clickOn(*this);
+        emit stepped();
     }
     else
     {
@@ -54,7 +55,7 @@ bool Cell::isMine() const
 
 void Cell::open()
 {
-    switch (mMineBehind) {
+    switch (mMineBeside) {
     case 1:
         mTypeCell = ImageType::One;
         break;

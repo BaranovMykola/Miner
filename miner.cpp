@@ -9,8 +9,8 @@ Miner::Miner(QWidget *parent) :
 {
     ui->setupUi(this);
 //    this->setWindowFlags(this->windowFlags() | Qt::MSWindowsFixedSizeDialogHint);
+    mMineField.setMine(1);
     ui->fieldBox->addLayout(mMineField.getField());
-
 }
 
 Miner::~Miner()

@@ -38,6 +38,7 @@ class Cell : public QWidget
 {
     Q_OBJECT
     friend class BasicCellState;
+    friend class GridField;
 public:
     explicit Cell(QWidget *parent = 0);
     virtual void enterEvent(QEvent* event) override;
@@ -48,6 +49,7 @@ public:
     bool isMine()const;
     void open();
 signals:
+    void stepped();
 public slots:
 
 private:
@@ -58,7 +60,7 @@ private:
     ImageType mTypeCell;
     QLabel mGraphic;
     std::unique_ptr<AbstractCellState> state;
-    int mMineBehind;
+    int mMineBeside;
 };
 
 #endif // CELL_H
