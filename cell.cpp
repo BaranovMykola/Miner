@@ -29,8 +29,15 @@ void Cell::mousePressEvent(QMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
     {
-        state->clickOn(*this);
-        emit stepped();
+        try
+        {
+            state->clickOn(*this);
+            emit stepped();
+        }
+        catch(...)
+        {
+            emit mine();
+        }
     }
     else
     {

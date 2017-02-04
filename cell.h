@@ -12,7 +12,7 @@
 #include "abstractcellstate.h"
 #include "basiccellstate.h"
 
-enum ImageType{Basic, Flag, Quastion, Empty, One, Two, Three, Four, Five, Six, Seven, Eight, Mine};
+enum ImageType{Basic, Flag, Quastion, Empty, One, Two, Three, Four, Five, Six, Seven, Eight, Mine, Exploded};
 const QString ResourcePrefix = ":/cells/resources/%1.png";
 const std::map<ImageType, QString> GraphicsFile =
 {
@@ -28,7 +28,8 @@ const std::map<ImageType, QString> GraphicsFile =
     std::make_pair(ImageType::Eight, ResourcePrefix.arg("cell_8")),
     std::make_pair(ImageType::Flag, ResourcePrefix.arg("cell_f")),
     std::make_pair(ImageType::Mine, ResourcePrefix.arg("cell_m")),
-    std::make_pair(ImageType::Quastion, ResourcePrefix.arg("cell_q"))
+    std::make_pair(ImageType::Quastion, ResourcePrefix.arg("cell_q")),
+    std::make_pair(ImageType::Exploded, ResourcePrefix.arg("cell_m_e"))
 };
 
 const int RealCellSize = 30;
@@ -50,6 +51,7 @@ public:
     void open();
 signals:
     void stepped();
+    void mine();
 public slots:
 
 private:

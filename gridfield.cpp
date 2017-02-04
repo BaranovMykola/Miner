@@ -34,7 +34,6 @@ GridField::GridField(QWidget *parent):
         h = 0;
         ++w;
     }
-//    connect (mapper, SIGNAL(mapped(QWidget*)), this, SLOT(slotStepOn(QWidget*))) ;
     srand(time(0));
 }
 
@@ -58,16 +57,6 @@ void GridField::setMine(int count)
         cells[w][h]->setMine(true);
         updateBesideCells(w,h);
 
-    }
-    for(auto i : cells)
-    {
-        for(auto j : i)
-        {
-            if(!j->isMine())
-            {
-//                j->open();
-            }
-        }
     }
 }
 
@@ -95,9 +84,9 @@ void GridField::slotStepOn(int w, int h)
     qDebug() << "w: " << w << " h: " << h;
 }
 
-void GridField::slotTest()
+void GridField::slotMine()
 {
-    qDebug() << "slot test";
+
 }
 
 bool GridField::isCorrect(int _w, int _h)
