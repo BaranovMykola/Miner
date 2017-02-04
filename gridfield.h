@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QLayout>
 
+#include <vector>
+
 #include "cell.h"
 
 const int Width = 10;
@@ -16,6 +18,7 @@ public:
     explicit GridField(QWidget* parent = 0);
     QVBoxLayout *getField();
 private:
+    std::vector<std::vector<Cell*>> cells;
     QVBoxLayout mField;
 };
 
