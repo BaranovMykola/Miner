@@ -6,7 +6,9 @@
 
 
 Cell::Cell(QWidget *parent) : QWidget(parent),
-    mTypeCell(ImageType::Basic)
+    mTypeCell(ImageType::Basic),
+    mMineBehind(0),
+    mMine(false)
 {
     mGraphic.setParent(this);
     updateGrpahic();
@@ -48,6 +50,40 @@ void Cell::setMine(bool mine)
 bool Cell::isMine() const
 {
     return mMine;
+}
+
+void Cell::open()
+{
+    switch (mMineBehind) {
+    case 1:
+        mTypeCell = ImageType::One;
+        break;
+    case 2:
+        mTypeCell = ImageType::Two;
+        break;
+    case 3:
+        mTypeCell = ImageType::Three;
+        break;
+    case 4:
+        mTypeCell = ImageType::Four;
+        break;
+    case 5:
+        mTypeCell = ImageType::Five;
+        break;
+    case 6:
+        mTypeCell = ImageType::Six;
+        break;
+    case 7:
+        mTypeCell = ImageType::Seven;
+        break;
+    case 8:
+        mTypeCell = ImageType::Eight;
+        break;
+    default:
+        mTypeCell = ImageType::Empty;
+        break;
+    }
+    updateGrpahic();
 }
 
 void Cell::updateGrpahic()

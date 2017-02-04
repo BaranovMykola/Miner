@@ -6,7 +6,13 @@ void BasicCellState::clickOn(Cell &obj)
 {
     obj.state = std::make_unique<SteppedCellState>(SteppedCellState());
     obj.resizeCell(RealCellSize);
-    delete this;
+//    delete this;
+    std::unique_ptr<BasicCellState> deleter(this);
+    if(obj.isMine())
+    {
+        throw ImageType::Mine;
+    }
+    obj.open();
 }
 
 void BasicCellState::changeCell(Cell &obj, int toSize)

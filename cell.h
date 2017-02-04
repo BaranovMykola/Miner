@@ -39,11 +39,6 @@ class Cell : public QWidget
     Q_OBJECT
     friend class BasicCellState;
 public:
-
-//    const std::initializer_list<std::pair<ImageType, QString>>
-
-
-
     explicit Cell(QWidget *parent = 0);
     virtual void enterEvent(QEvent* event) override;
     virtual void leaveEvent(QEvent *event) override;
@@ -51,6 +46,7 @@ public:
     void show();
     void setMine(bool mine);
     bool isMine()const;
+    void open();
 signals:
 public slots:
 
@@ -62,6 +58,7 @@ private:
     ImageType mTypeCell;
     QLabel mGraphic;
     std::unique_ptr<AbstractCellState> state;
+    int mMineBehind;
 };
 
 #endif // CELL_H
