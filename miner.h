@@ -5,7 +5,8 @@
 
 #include "gridfield.h"
 
-const int CellsDistance = 8;
+const int CellsStretchFactor = 3;
+const int CellLayoutWidth = RealCellSize+CellsStretchFactor;
 
 namespace Ui {
 class Miner;

@@ -11,6 +11,8 @@ Miner::Miner(QWidget *parent) :
 //    this->setWindowFlags(this->windowFlags() | Qt::MSWindowsFixedSizeDialogHint);
     mMineField.setMine(10);
     ui->fieldBox->addLayout(mMineField.getField());
+    this->setFixedHeight(ui->sun->height()+Height*(CellLayoutWidth));
+    this->setFixedWidth(Width*CellLayoutWidth);
     connect(&mMineField, SIGNAL(explodeSun()), this, SLOT(slotSunExploded()), Qt::UniqueConnection);
 }
 

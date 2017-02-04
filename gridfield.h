@@ -8,8 +8,8 @@
 
 #include "cell.h"
 
-const int Width = 10;
-const int Height = 10;
+const int Width = 30;
+const int Height = 30;
 
 class GridField : public QWidget
 {
