@@ -27,6 +27,9 @@ const std::map<ImageType, QString> GraphicsFile =
     std::make_pair(ImageType::Quastion, ResourcePrefix.arg("cell_q"))
 };
 
+const int RealCellSize = 30;
+const int MinimizeCellSize = 28;
+
 class Cell : public QWidget
 {
     Q_OBJECT
@@ -37,14 +40,16 @@ public:
 
 
     explicit Cell(QWidget *parent = 0);
-
+    virtual void enterEvent(QEvent* event) override;
+    virtual void leaveEvent(QEvent *event) override;
     void show();
-
 signals:
-
 public slots:
 
 private:
+
+    void resizeCell(int toSize);
+
     QLabel mGraphic;
 };
 
