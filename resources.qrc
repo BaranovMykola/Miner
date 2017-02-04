@@ -13,6 +13,10 @@
         <file>resources/cell_m.png</file>
         <file>resources/cell_q.png</file>
         <file>resources/empty_cell.png</file>
+        <file>resources/cell_m_e.png</file>
+    </qresource>
+    <qresource prefix="/sun">
         <file>resources/sun.png</file>
+        <file>resources/sun_e.png</file>
     </qresource>
 </RCC>

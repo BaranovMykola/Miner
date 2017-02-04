@@ -19,9 +19,11 @@ public:
     QVBoxLayout *getField();
     void setMine(int count);
     void updateBesideCells(int w, int h);
+signals:
+    void explodeSun();
 public slots:
     void slotStepOn(int w, int h);
-    void slotTest();
+    void slotMine();
 private:
     bool isCorrect(int w, int h);
     std::pair<int, int> getPosition(Cell* _cell);

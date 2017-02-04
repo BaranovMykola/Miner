@@ -18,7 +18,8 @@ class Miner : public QMainWindow
 public:
     explicit Miner(QWidget *parent = 0);
     ~Miner();
-
+public slots:
+    void slotSunExploded();
 private:
     Ui::Miner *ui;
     GridField mMineField;

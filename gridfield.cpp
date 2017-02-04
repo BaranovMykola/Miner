@@ -29,6 +29,7 @@ GridField::GridField(QWidget *parent):
         for(auto j : i)
         {
             QObject::connect(j, &Cell::stepped, [this, w, h](){this->slotStepOn(w,h);});
+            QObject::connect(j, SIGNAL(mine()), this, SLOT(slotMine()), Qt::UniqueConnection);
             ++h;
         }
         h = 0;
@@ -86,7 +87,22 @@ void GridField::slotStepOn(int w, int h)
 
 void GridField::slotMine()
 {
-
+    for(auto i : cells)
+    {
+        for(auto j : i)
+        {
+            if(!j->isMine())
+            {
+                j->open();
+            }
+            else
+            {
+                j->mTypeCell = ImageType::Exploded;
+                j->updateGrpahic();
+            }
+        }
+    }
+    emit explodeSun();
 }
 
 bool GridField::isCorrect(int _w, int _h)

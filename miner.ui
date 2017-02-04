@@ -28,12 +28,12 @@
       <widget class="QLCDNumber" name="lcdNumber_2"/>
      </item>
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="sun">
        <property name="text">
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/cells/resources/sun.png</pixmap>
+        <pixmap resource="resources.qrc">:/sun/resources/sun.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
