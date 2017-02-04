@@ -20,7 +20,7 @@ public:
     void setMine(int count);
     void updateBesideCells(int w, int h);
 public slots:
-    void slotStepOn(Cell* _cell);
+    void slotStepOn(int w, int h);
     void slotTest();
 private:
     bool isCorrect(int w, int h);

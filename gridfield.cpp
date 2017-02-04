@@ -28,13 +28,13 @@ GridField::GridField(QWidget *parent):
     {
         for(auto j : i)
         {
-            connect(j, SIGNAL(stepped()),  mapper, SLOT(map()), Qt::UniqueConnection);
-            mapper->setMapping(j, j);
+            QObject::connect(j, &Cell::stepped, [this, w, h](){this->slotStepOn(w,h);});
             ++h;
         }
+        h = 0;
         ++w;
     }
-    connect (mapper, SIGNAL(mapped(QWidget*)), this, SLOT(slotStepOn(QWidget*))) ;
+//    connect (mapper, SIGNAL(mapped(QWidget*)), this, SLOT(slotStepOn(QWidget*))) ;
     srand(time(0));
 }
 
@@ -89,10 +89,10 @@ void GridField::updateBesideCells(int w, int h)
     }
 }
 
-void GridField::slotStepOn(Cell* _cell)
+void GridField::slotStepOn(int w, int h)
 {
 //    auto pos = getPosition(sender());
-//    qDebug() << "w: " <<pos.first << " h: " << pos.second;
+    qDebug() << "w: " << w << " h: " << h;
 }
 
 void GridField::slotTest()
