@@ -29,3 +29,6 @@ SOURCES += main.cpp\
 HEADERS  += miner.h
 
 FORMS    += miner.ui
+
+RESOURCES += \
+    resources.qrc

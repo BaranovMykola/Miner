@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/cells">
+        <file>resource/basic_cell.png</file>
+        <file>resource/cell_1.PNG</file>
+        <file>resource/cell_2.PNG</file>
+        <file>resource/cell_3.PNG</file>
+        <file>resource/cell_4.PNG</file>
+        <file>resource/cell_5.PNG</file>
+        <file>resource/cell_6.png</file>
+        <file>resource/cell_7.png</file>
+        <file>resource/cell_8.png</file>
+        <file>resource/cell_f.PNG</file>
+        <file>resource/cell_m.PNG</file>
+        <file>resource/cell_q.png</file>
+        <file>resource/empty_cell.PNG</file>
+        <file>resource/sun.png</file>
+    </qresource>
+</RCC>
