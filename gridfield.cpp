@@ -32,7 +32,7 @@ GridField::GridField(QWidget *parent):
         {
             QObject::connect(j, &Cell::stepped, [this, w, h](){this->slotStepOn(w,h);});
             QObject::connect(j, SIGNAL(mine()), this, SLOT(slotMine()), Qt::UniqueConnection);
-            QObject::connect(j, SIGNAL(mouseClickReleased()), this, SLOT(slotClickReleased()), Qt::UniqueConnection);
+            QObject::connect(j, SIGNAL(endKiss()), this, SLOT(slotClickReleased()), Qt::UniqueConnection);
             ++h;
         }
         h = 0;
@@ -112,6 +112,7 @@ void GridField::slotMine()
         {
             j->state.reset();
             j->state = std::make_unique<SteppedCellState>(SteppedCellState());
+            QObject::disconnect(j, SIGNAL(endKiss()), this, SLOT(slotClickReleased()));
             if(!j->isMine())
             {
                 j->open();

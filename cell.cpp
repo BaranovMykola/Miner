@@ -17,6 +17,7 @@ Cell::Cell(QWidget *parent) :
     connect(this, SIGNAL(mouseClicked()), this, SLOT(slotFlag()), Qt::UniqueConnection);
     connect(this, SIGNAL(mouseHovered()), this, SLOT(slotAnimationOn()), Qt::UniqueConnection);
     connect(this, SIGNAL(mouseReleased()), this, SLOT(slotAnimationOff()), Qt::UniqueConnection);
+    connect(this, SIGNAL(mouseClickReleased()), this, SLOT(slotMouseClickReleased()), Qt::UniqueConnection);
 }
 
 void Cell::setMine(bool mine)
@@ -105,6 +106,14 @@ void Cell::slotAnimationOn()
 void Cell::slotAnimationOff()
 {
     state->changeCell(*this, RealCellSize);
+}
+
+void Cell::slotMouseClickReleased()
+{
+    if(!isMine())
+    {
+        emit endKiss();
+    }
 }
 
 void Cell::updateGrpahic()

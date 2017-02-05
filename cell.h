@@ -52,11 +52,13 @@ public:
 signals:
     void mine();
     void stepped();
+    void endKiss();
 public slots:
     void slotStep();
     void slotFlag();
     void slotAnimationOn();
     void slotAnimationOff();
+    void slotMouseClickReleased();
 private:
     void updateGrpahic();
 
