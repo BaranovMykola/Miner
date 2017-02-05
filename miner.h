@@ -23,6 +23,7 @@ public:
     void getSmartSize();
 public slots:
     void slotUpdateSunImage(SunType type);
+    void slotLose();
 private:
     Ui::Miner *ui;
     GridField mMineField;

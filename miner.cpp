@@ -2,6 +2,7 @@
 #include "ui_miner.h"
 
 #include <QDebug>
+#include <QMessageBox>
 
 Miner::Miner(QWidget *parent) :
     QMainWindow(parent),
@@ -11,9 +12,10 @@ Miner::Miner(QWidget *parent) :
 //    this->setWindowFlags(this->windowFlags() | Qt::MSWindowsFixedSizeDialogHint);
     mMineField.setMine(10);
     ui->fieldBox->addLayout(mMineField.getField());
-    connect(&mMineField, &GridField::explodeSun, [this](){slotUpdateSunImage(SunType::ExplodedSun);});
+    connect(&mMineField, &GridField::loose, [this](){slotUpdateSunImage(SunType::ExplodedSun);});
     connect(&mMineField, &GridField::mouseClicked, [this](){slotUpdateSunImage(SunType::Kiss);});
     connect(&mMineField, &GridField::mouseCLickReleased, [this](){slotUpdateSunImage(SunType::BasicSun);});
+    connect(&mMineField, SIGNAL(loose()), this, SLOT(slotLose()), Qt::UniqueConnection);
     mSun.updateGrpahic();
     ui->sunlayout->addWidget(&mSun);
     getSmartSize();
@@ -31,22 +33,17 @@ void Miner::getSmartSize()
     this->setFixedWidth(this->width());
 }
 
-void Miner::slotSunExploded()
-{
-//    ui->sun->setPixmap(QPixmap(":/sun/resources/sun_e.png"));
-}
-
-void Miner::slotSunKiss()
-{
-//    ui->sun->setPixmap(QPixmap(":/sun/resources/sun_k.png"));
-}
-
-void Miner::slotSunReset()
-{
-    //    ui->sun->setPixmap(QPixmap(":/sun/resources/sun.png"));
-}
-
 void Miner::slotUpdateSunImage(SunType type)
 {
     mSun.setImage(type);
+}
+
+void Miner::slotLose()
+{
+    QMessageBox message;
+    message.setWindowTitle("You lose!");
+    message.setText("You have lose! Try again...");
+    message.setIconPixmap(QPixmap(GraphicsFile.at(ImageType::Exploded)));
+    message.exec();
+    mSun.setEnabled(true);
 }

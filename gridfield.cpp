@@ -132,7 +132,7 @@ void GridField::slotMine()
             }
         }
     }
-    emit explodeSun();
+    emit loose();
 }
 
 void GridField::slotClickReleased()

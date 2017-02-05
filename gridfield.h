@@ -22,7 +22,7 @@ public:
     void resetCells();
     void resetGridField(int minesCount);
 signals:
-    void explodeSun();
+    void loose();
     void mouseClicked();
     void mouseCLickReleased();
 public slots:

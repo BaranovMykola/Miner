@@ -20,13 +20,13 @@ void Sun::setEnabled(bool enabled)
     {
         connect(this, SIGNAL(mouseHovered()), this, SLOT(slotAnimationOn()), Qt::UniqueConnection);
         connect(this, SIGNAL(mouseReleased()), this, SLOT(slotAnimaionOff()), Qt::UniqueConnection);
-        connect(this, SIGNAL(mouseClickedMineButton()), this, SLOT(slotRestart()), Qt::UniqueConnection);
+//        connect(this, SIGNAL(mouseClickedMineButton()), this, SLOT(slotRestart()), Qt::UniqueConnection);
     }
     else
     {
         disconnect(this, SIGNAL(mouseHovered()), this, SLOT(slotAnimationOn()));
         disconnect(this, SIGNAL(mouseReleased()), this, SLOT(slotAnimaionOff()));
-        disconnect(this, SIGNAL(mouseClickedMineButton()), this, SLOT(slotRestart()));
+//        disconnect(this, SIGNAL(mouseClickedMineButton()), this, SLOT(slotRestart()));
     }
 }
 
