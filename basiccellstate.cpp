@@ -10,10 +10,13 @@ void BasicCellState::clickOn(Cell &obj)
     std::unique_ptr<BasicCellState> deleter(this);
     if(obj.isMine())
     {
-        throw ImageType::Mine;
+        emit obj.mine();
+    }
+    else
+    {
+        emit obj.stepped();
     }
     obj.open();
-    emit obj.stepped();
 }
 
 void BasicCellState::changeCell(Cell &obj, int toSize)

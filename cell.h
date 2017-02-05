@@ -11,6 +11,7 @@
 
 #include "abstractcellstate.h"
 #include "basiccellstate.h"
+#include "abstractcell.h"
 
 enum ImageType{Basic, Flag, Quastion, Empty, One, Two, Three, Four, Five, Six, Seven, Eight, Mine, Exploded};
 const QString ResourcePrefix = ":/cells/resources/%1.png";
@@ -35,18 +36,13 @@ const std::map<ImageType, QString> GraphicsFile =
 const int RealCellSize = 30;
 const int MinimizeCellSize = 28;
 
-class Cell : public QWidget
+class Cell : public AbstractCell
 {
     Q_OBJECT
     friend class BasicCellState;
     friend class GridField;
 public:
     explicit Cell(QWidget *parent = 0);
-    virtual void enterEvent(QEvent* event) override;
-    virtual void leaveEvent(QEvent *event) override;
-    virtual void mousePressEvent(QMouseEvent* event) override;
-    virtual void mouseReleaseEvent(QMouseEvent* event) override;
-    void show();
     void setMine(bool mine);
     bool isMine()const;
     void open();
@@ -54,20 +50,21 @@ public:
     void resetState();
     void changeToStepped();
 signals:
-    void stepped();
     void mine();
-    void mouseClickReleased();
+    void stepped();
 public slots:
-
+    void slotStep();
+    void slotFlag();
+    void slotAnimationOn();
+    void slotAnimationOff();
 private:
     void updateGrpahic();
-    void resizeCell(int toSize);
 
-    bool mMine;
     ImageType mTypeCell;
-    QLabel mGraphic;
+    bool mMine;
     std::unique_ptr<AbstractCellState> state;
     int mMineBeside;
 };
 
 #endif // CELL_H
+

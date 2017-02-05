@@ -1,8 +1,10 @@
 #include "abstractcell.h"
 
+#include <QMouseEvent>
+
 AbstractCell::AbstractCell(QWidget *parent) : QWidget(parent)
 {
-
+    mGraphic.setParent(this);
 }
 
 void AbstractCell::enterEvent(QEvent *event)

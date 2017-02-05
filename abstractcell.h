@@ -21,6 +21,9 @@ signals:
     mouseReleased();
 public slots:
 
+protected:
+    void updateGrpahic(const QString& name);
+    void resizeCell(int toSize);
 private:
     QLabel mGraphic;
 };

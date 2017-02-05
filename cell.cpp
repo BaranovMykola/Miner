@@ -5,56 +5,18 @@
 #include <QMouseEvent>
 
 
-Cell::Cell(QWidget *parent) : QWidget(parent),
+Cell::Cell(QWidget *parent) :
+    AbstractCell(parent),
     mTypeCell(ImageType::Basic),
     mMineBeside(0),
     mMine(false)
 {
-    mGraphic.setParent(this);
     updateGrpahic();
     state = std::make_unique<BasicCellState>(BasicCellState());
-}
-
-void Cell::enterEvent(QEvent *event)
-{
-    state->changeCell(*this, MinimizeCellSize);
-}
-
-void Cell::leaveEvent(QEvent *event)
-{
-    state->changeCell(*this, RealCellSize);
-}
-
-void Cell::mousePressEvent(QMouseEvent *event)
-{
-    if(event->button() == Qt::LeftButton)
-    {
-        try
-        {
-            state->clickOn(*this);
-        }
-        catch(...)
-        {
-            emit mine();
-        }
-    }
-    else
-    {
-        state->hintCell(*this);
-    }
-}
-
-void Cell::mouseReleaseEvent(QMouseEvent *event)
-{
-    if(event->button() == Qt::LeftButton && !isMine())
-    {
-        emit mouseClickReleased();
-    }
-}
-
-void Cell::show()
-{
-    mGraphic.show();
+    connect(this, SIGNAL(mouseClickedMineButton()), this, SLOT(slotStep()), Qt::UniqueConnection);
+    connect(this, SIGNAL(mouseClicked()), this, SLOT(slotFlag()), Qt::UniqueConnection);
+    connect(this, SIGNAL(mouseHovered()), this, SLOT(slotAnimationOn()), Qt::UniqueConnection);
+    connect(this, SIGNAL(mouseReleased()), this, SLOT(slotAnimationOff()), Qt::UniqueConnection);
 }
 
 void Cell::setMine(bool mine)
@@ -69,34 +31,42 @@ bool Cell::isMine() const
 
 void Cell::open()
 {
-    switch (mMineBeside) {
-    case 1:
-        mTypeCell = ImageType::One;
-        break;
-    case 2:
-        mTypeCell = ImageType::Two;
-        break;
-    case 3:
-        mTypeCell = ImageType::Three;
-        break;
-    case 4:
-        mTypeCell = ImageType::Four;
-        break;
-    case 5:
-        mTypeCell = ImageType::Five;
-        break;
-    case 6:
-        mTypeCell = ImageType::Six;
-        break;
-    case 7:
-        mTypeCell = ImageType::Seven;
-        break;
-    case 8:
-        mTypeCell = ImageType::Eight;
-        break;
-    default:
-        mTypeCell = ImageType::Empty;
-        break;
+    if(isMine())
+    {
+        mTypeCell = ImageType::Exploded;
+    }
+    else
+    {
+        switch (mMineBeside)
+        {
+            case 1:
+                mTypeCell = ImageType::One;
+                break;
+            case 2:
+                mTypeCell = ImageType::Two;
+                break;
+            case 3:
+                mTypeCell = ImageType::Three;
+                break;
+            case 4:
+                mTypeCell = ImageType::Four;
+                break;
+            case 5:
+                mTypeCell = ImageType::Five;
+                break;
+            case 6:
+                mTypeCell = ImageType::Six;
+                break;
+            case 7:
+                mTypeCell = ImageType::Seven;
+                break;
+            case 8:
+                mTypeCell = ImageType::Eight;
+                break;
+            default:
+                mTypeCell = ImageType::Empty;
+                break;
+        }
     }
     updateGrpahic();
 }
@@ -117,15 +87,29 @@ void Cell::resetState()
 
 }
 
-void Cell::updateGrpahic()
+void Cell::slotStep()
 {
-    mGraphic.setPixmap(QPixmap(GraphicsFile.at(mTypeCell)));
+    state->clickOn(*this);
 }
 
-void Cell::resizeCell(int toSize)
+void Cell::slotFlag()
 {
-    auto pxm = mGraphic.pixmap();
-    mGraphic.setPixmap(pxm->scaledToHeight(toSize));
+    state->hintCell(*this);
+}
+
+void Cell::slotAnimationOn()
+{
+    state->changeCell(*this, MinimizeCellSize);
+}
+
+void Cell::slotAnimationOff()
+{
+    state->changeCell(*this, RealCellSize);
+}
+
+void Cell::updateGrpahic()
+{
+    AbstractCell::updateGrpahic(GraphicsFile.at(mTypeCell));
 }
 
 
