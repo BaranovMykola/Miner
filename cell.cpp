@@ -32,7 +32,6 @@ void Cell::mousePressEvent(QMouseEvent *event)
         try
         {
             state->clickOn(*this);
-            emit stepped();
         }
         catch(...)
         {
@@ -42,6 +41,14 @@ void Cell::mousePressEvent(QMouseEvent *event)
     else
     {
         state->hintCell(*this);
+    }
+}
+
+void Cell::mouseReleaseEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton && !isMine())
+    {
+        emit mouseClickReleased();
     }
 }
 
@@ -99,9 +106,15 @@ void Cell::reset()
     mMine = false;
     mTypeCell = ImageType::Basic;
     state.reset();
-    state = std::make_unique<BasicCellState>(BasicCellState());
+    resetState();
     mMineBeside = 0;
     updateGrpahic();
+}
+
+void Cell::resetState()
+{
+    state = std::make_unique<BasicCellState>(BasicCellState());
+
 }
 
 void Cell::updateGrpahic()

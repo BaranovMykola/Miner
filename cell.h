@@ -45,14 +45,18 @@ public:
     virtual void enterEvent(QEvent* event) override;
     virtual void leaveEvent(QEvent *event) override;
     virtual void mousePressEvent(QMouseEvent* event) override;
+    virtual void mouseReleaseEvent(QMouseEvent* event) override;
     void show();
     void setMine(bool mine);
     bool isMine()const;
     void open();
     void reset();
+    void resetState();
+    void changeToStepped();
 signals:
     void stepped();
     void mine();
+    void mouseClickReleased();
 public slots:
 
 private:

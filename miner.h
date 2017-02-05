@@ -21,6 +21,8 @@ public:
     ~Miner();
 public slots:
     void slotSunExploded();
+    void slotSunKiss();
+    void slotSunReset();
 private:
     Ui::Miner *ui;
     GridField mMineField;

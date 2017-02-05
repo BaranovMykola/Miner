@@ -6,6 +6,8 @@
 #include <ctime>
 #include <iterator>
 
+#include "steppedcellstate.h"
+
 GridField::GridField(QWidget *parent):
     QWidget(parent)
 {
@@ -30,6 +32,7 @@ GridField::GridField(QWidget *parent):
         {
             QObject::connect(j, &Cell::stepped, [this, w, h](){this->slotStepOn(w,h);});
             QObject::connect(j, SIGNAL(mine()), this, SLOT(slotMine()), Qt::UniqueConnection);
+            QObject::connect(j, SIGNAL(mouseClickReleased()), this, SLOT(slotClickReleased()), Qt::UniqueConnection);
             ++h;
         }
         h = 0;
@@ -98,8 +101,7 @@ void GridField::resetGridField(int minesCount)
 
 void GridField::slotStepOn(int w, int h)
 {
-//    auto pos = getPosition(sender());
-    qDebug() << "w: " << w << " h: " << h;
+    emit mouseClicked();
 }
 
 void GridField::slotMine()
@@ -108,10 +110,13 @@ void GridField::slotMine()
     {
         for(auto j : i)
         {
+            j->state.reset();
+            j->state = std::make_unique<SteppedCellState>(SteppedCellState());
             if(!j->isMine())
             {
                 j->open();
             }
+
             else
             {
                 j->mTypeCell = ImageType::Exploded;
@@ -120,6 +125,11 @@ void GridField::slotMine()
         }
     }
     emit explodeSun();
+}
+
+void GridField::slotClickReleased()
+{
+    emit mouseCLickReleased();
 }
 
 bool GridField::isCorrect(int _w, int _h)

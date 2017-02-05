@@ -2,17 +2,18 @@
 
 #include "steppedcellstate.h"
 
+
 void BasicCellState::clickOn(Cell &obj)
 {
     obj.state = std::make_unique<SteppedCellState>(SteppedCellState());
     obj.resizeCell(RealCellSize);
-//    delete this;
     std::unique_ptr<BasicCellState> deleter(this);
     if(obj.isMine())
     {
         throw ImageType::Mine;
     }
     obj.open();
+    emit obj.stepped();
 }
 
 void BasicCellState::changeCell(Cell &obj, int toSize)

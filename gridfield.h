@@ -23,9 +23,12 @@ public:
     void resetGridField(int minesCount);
 signals:
     void explodeSun();
+    void mouseClicked();
+    void mouseCLickReleased();
 public slots:
     void slotStepOn(int w, int h);
     void slotMine();
+    void slotClickReleased();
 private:
     bool isCorrect(int w, int h);
     std::pair<int, int> getPosition(Cell* _cell);
