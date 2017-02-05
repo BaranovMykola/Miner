@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     basiccellstate.cpp \
     steppedcellstate.cpp \
     gridfield.cpp \
-    abstractcell.cpp
+    abstractcell.cpp \
+    sun.cpp
 
 HEADERS  += miner.h \
     cell.h \
@@ -38,7 +39,8 @@ HEADERS  += miner.h \
     basiccellstate.h \
     steppedcellstate.h \
     gridfield.h \
-    abstractcell.h
+    abstractcell.h \
+    sun.h
 
 FORMS    += miner.ui
 

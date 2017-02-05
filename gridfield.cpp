@@ -97,6 +97,13 @@ void GridField::resetGridField(int minesCount)
 {
     resetCells();
     setMine(minesCount);
+    for(auto i : cells)
+    {
+        for(auto j : i)
+        {
+            QObject::connect(j, SIGNAL(endKiss()), this, SLOT(slotClickReleased()), Qt::UniqueConnection);
+        }
+    }
 }
 
 void GridField::slotStepOn(int w, int h)
