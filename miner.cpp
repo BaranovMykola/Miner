@@ -11,19 +11,24 @@ Miner::Miner(QWidget *parent) :
 //    this->setWindowFlags(this->windowFlags() | Qt::MSWindowsFixedSizeDialogHint);
     mMineField.setMine(10);
     ui->fieldBox->addLayout(mMineField.getField());
-//    this->setFixedHeight(ui->sun->height()+Height*(CellLayoutWidth));
-//    this->setFixedWidth(Width*CellLayoutWidth);
     connect(&mMineField, SIGNAL(explodeSun()), this, SLOT(slotSunExploded()), Qt::UniqueConnection);
     connect(&mMineField, SIGNAL(mouseClicked()), this, SLOT(slotSunKiss()), Qt::UniqueConnection);
     connect(&mMineField, SIGNAL(mouseCLickReleased()), this, SLOT(slotSunReset()), Qt::UniqueConnection);
     mSun.updateGrpahic();
     ui->sunlayout->addWidget(&mSun);
-
+    getSmartSize();
 }
 
 Miner::~Miner()
 {
     delete ui;
+}
+
+void Miner::getSmartSize()
+{
+    this->adjustSize();
+    this->setFixedHeight(this->height());
+    this->setFixedWidth(this->width());
 }
 
 void Miner::slotSunExploded()

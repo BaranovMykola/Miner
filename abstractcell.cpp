@@ -1,10 +1,12 @@
 #include "abstractcell.h"
 
 #include <QMouseEvent>
+#include <QDebug>
 
 AbstractCell::AbstractCell(QWidget *parent) : QWidget(parent)
 {
     mGraphic.setParent(this);
+
 }
 
 void AbstractCell::enterEvent(QEvent *event)
@@ -39,7 +41,16 @@ void AbstractCell::mouseReleaseEvent(QMouseEvent *event)
 
 void AbstractCell::updateGrpahic(const QString &name)
 {
-    mGraphic.setPixmap(QPixmap(name));
+    auto p = QPixmap(34,34);
+    p.load(name);
+    mGraphic.setPixmap(p);
+//        auto g = this->geometry();
+//        g.setWidth(34);
+//        g.setHeight(34);
+        this->setMaximumWidth(34);
+        this->setMaximumHeight(34);
+    this->setMinimumWidth(34);
+    this->setMinimumHeight(34);
 }
 
 void AbstractCell::resizeCell(int toSize)

@@ -1,10 +1,14 @@
 #include "sun.h"
 
+#include <QDebug>
+
 Sun::Sun(QWidget *parent):
     AbstractCell(parent),
     mType(SunType::BasicSun)
 {
     updateGrpahic();
+    connect(this, SIGNAL(mouseHovered()), this, SLOT(slotAnimationOn()), Qt::UniqueConnection);
+    connect(this, SIGNAL(mouseReleased()), this, SLOT(slotAnimaionOff()), Qt::UniqueConnection);
 }
 
 void Sun::updateGrpahic()
@@ -25,4 +29,5 @@ void Sun::slotAnimationOn()
 void Sun::slotAnimaionOff()
 {
     resizeCell(SunSize);
+    qDebug() <<"resized again";
 }

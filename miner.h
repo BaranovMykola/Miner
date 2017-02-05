@@ -20,6 +20,7 @@ class Miner : public QMainWindow
 public:
     explicit Miner(QWidget *parent = 0);
     ~Miner();
+    void getSmartSize();
 public slots:
     void slotSunExploded();
     void slotSunKiss();
