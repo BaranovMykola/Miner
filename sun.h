@@ -23,6 +23,8 @@ class Sun : public AbstractCell
 public:
     explicit Sun(QWidget* parent = 0);
     void updateGrpahic();
+    void setEnabled(bool enabled);
+    void setImage(SunType type);
 public slots:
     void slotRestart(GridField& field, const int count);
     void slotAnimationOn();

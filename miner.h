@@ -22,9 +22,7 @@ public:
     ~Miner();
     void getSmartSize();
 public slots:
-    void slotSunExploded();
-    void slotSunKiss();
-    void slotSunReset();
+    void slotUpdateSunImage(SunType type);
 private:
     Ui::Miner *ui;
     GridField mMineField;

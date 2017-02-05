@@ -11,9 +11,9 @@ Miner::Miner(QWidget *parent) :
 //    this->setWindowFlags(this->windowFlags() | Qt::MSWindowsFixedSizeDialogHint);
     mMineField.setMine(10);
     ui->fieldBox->addLayout(mMineField.getField());
-    connect(&mMineField, SIGNAL(explodeSun()), this, SLOT(slotSunExploded()), Qt::UniqueConnection);
-    connect(&mMineField, SIGNAL(mouseClicked()), this, SLOT(slotSunKiss()), Qt::UniqueConnection);
-    connect(&mMineField, SIGNAL(mouseCLickReleased()), this, SLOT(slotSunReset()), Qt::UniqueConnection);
+    connect(&mMineField, &GridField::explodeSun, [this](){slotUpdateSunImage(SunType::ExplodedSun);});
+    connect(&mMineField, &GridField::mouseClicked, [this](){slotUpdateSunImage(SunType::Kiss);});
+    connect(&mMineField, &GridField::mouseCLickReleased, [this](){slotUpdateSunImage(SunType::BasicSun);});
     mSun.updateGrpahic();
     ui->sunlayout->addWidget(&mSun);
     getSmartSize();
@@ -43,5 +43,10 @@ void Miner::slotSunKiss()
 
 void Miner::slotSunReset()
 {
-//    ui->sun->setPixmap(QPixmap(":/sun/resources/sun.png"));
+    //    ui->sun->setPixmap(QPixmap(":/sun/resources/sun.png"));
+}
+
+void Miner::slotUpdateSunImage(SunType type)
+{
+    mSun.setImage(type);
 }

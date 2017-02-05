@@ -7,13 +7,33 @@ Sun::Sun(QWidget *parent):
     mType(SunType::BasicSun)
 {
     updateGrpahic();
-    connect(this, SIGNAL(mouseHovered()), this, SLOT(slotAnimationOn()), Qt::UniqueConnection);
-    connect(this, SIGNAL(mouseReleased()), this, SLOT(slotAnimaionOff()), Qt::UniqueConnection);
 }
 
 void Sun::updateGrpahic()
 {
     AbstractCell::updateGrpahic(SunGraphicsFile.at(mType));
+}
+
+void Sun::setEnabled(bool enabled)
+{
+    if(enabled)
+    {
+        connect(this, SIGNAL(mouseHovered()), this, SLOT(slotAnimationOn()), Qt::UniqueConnection);
+        connect(this, SIGNAL(mouseReleased()), this, SLOT(slotAnimaionOff()), Qt::UniqueConnection);
+        connect(this, SIGNAL(mouseClickedMineButton()), this, SLOT(slotRestart()), Qt::UniqueConnection);
+    }
+    else
+    {
+        disconnect(this, SIGNAL(mouseHovered()), this, SLOT(slotAnimationOn()));
+        disconnect(this, SIGNAL(mouseReleased()), this, SLOT(slotAnimaionOff()));
+        disconnect(this, SIGNAL(mouseClickedMineButton()), this, SLOT(slotRestart()));
+    }
+}
+
+void Sun::setImage(SunType type)
+{
+    mType = type;
+    updateGrpahic();
 }
 
 void Sun::slotRestart(GridField &field, const int count)
