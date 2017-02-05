@@ -11,14 +11,15 @@ enum SunType{BasicSun, ExplodedSun, Win, Kiss};
 const QString SunResourcePrefix = ":/sun/resources/%1.png";
 const std::map<SunType, QString> SunGraphicsFile =
 {
-    std::make_pair(SunType::BasicSun, ResourcePrefix.arg("sun")),
-    std::make_pair(SunType::ExplodedSun, ResourcePrefix.arg("sun_e")),
-    std::make_pair(SunType::Win, ResourcePrefix.arg("sun_g")),
-    std::make_pair(SunType::Kiss, ResourcePrefix.arg("sun_k"))
+    std::make_pair(SunType::BasicSun, SunResourcePrefix.arg("sun")),
+    std::make_pair(SunType::ExplodedSun, SunResourcePrefix.arg("sun_e")),
+    std::make_pair(SunType::Win, SunResourcePrefix.arg("sun_g")),
+    std::make_pair(SunType::Kiss, SunResourcePrefix.arg("sun_k"))
 };
 
 class Sun : public AbstractCell
 {
+    Q_OBJECT
 public:
     explicit Sun(QWidget* parent = 0);
     void updateGrpahic();

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "gridfield.h"
+#include "sun.h"
 
 const int CellsStretchFactor = 3;
 const int CellLayoutWidth = RealCellSize+CellsStretchFactor;
@@ -26,6 +27,7 @@ public slots:
 private:
     Ui::Miner *ui;
     GridField mMineField;
+    Sun mSun;
 };
 
 #endif // MINER_H

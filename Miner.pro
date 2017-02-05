@@ -48,3 +48,4 @@ RESOURCES += \
     resources.qrc
 
 CONFIG += c++14
+CONFIG += Sun

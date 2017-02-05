@@ -1,9 +1,10 @@
 #include "sun.h"
 
 Sun::Sun(QWidget *parent):
-    AbstractCell(parent)
+    AbstractCell(parent),
+    mType(SunType::BasicSun)
 {
-
+    updateGrpahic();
 }
 
 void Sun::updateGrpahic()
