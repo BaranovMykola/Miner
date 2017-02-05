@@ -49,6 +49,7 @@ public:
     void setMine(bool mine);
     bool isMine()const;
     void open();
+    void reset();
 signals:
     void stepped();
     void mine();

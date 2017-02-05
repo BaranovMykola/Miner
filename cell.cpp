@@ -94,6 +94,16 @@ void Cell::open()
     updateGrpahic();
 }
 
+void Cell::reset()
+{
+    mMine = false;
+    mTypeCell = ImageType::Basic;
+    state.reset();
+    state = std::make_unique<BasicCellState>(BasicCellState());
+    mMineBeside = 0;
+    updateGrpahic();
+}
+
 void Cell::updateGrpahic()
 {
     mGraphic.setPixmap(QPixmap(GraphicsFile.at(mTypeCell)));

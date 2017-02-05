@@ -8,8 +8,8 @@
 
 #include "cell.h"
 
-const int Width = 30;
-const int Height = 30;
+const int Width = 10;
+const int Height = 10;
 
 class GridField : public QWidget
 {
@@ -19,6 +19,8 @@ public:
     QVBoxLayout *getField();
     void setMine(int count);
     void updateBesideCells(int w, int h);
+    void resetCells();
+    void resetGridField(int minesCount);
 signals:
     void explodeSun();
 public slots:

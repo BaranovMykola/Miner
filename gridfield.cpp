@@ -79,6 +79,23 @@ void GridField::updateBesideCells(int w, int h)
     }
 }
 
+void GridField::resetCells()
+{
+    for(auto i : cells)
+    {
+        for(auto j : i)
+        {
+            j->reset();
+        }
+    }
+}
+
+void GridField::resetGridField(int minesCount)
+{
+    resetCells();
+    setMine(minesCount);
+}
+
 void GridField::slotStepOn(int w, int h)
 {
 //    auto pos = getPosition(sender());
