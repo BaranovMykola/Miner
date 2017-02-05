@@ -29,14 +29,16 @@ SOURCES += main.cpp\
     abstractcellstate.cpp \
     basiccellstate.cpp \
     steppedcellstate.cpp \
-    gridfield.cpp
+    gridfield.cpp \
+    abstractcell.cpp
 
 HEADERS  += miner.h \
     cell.h \
     abstractcellstate.h \
     basiccellstate.h \
     steppedcellstate.h \
-    gridfield.h
+    gridfield.h \
+    abstractcell.h
 
 FORMS    += miner.ui
 
