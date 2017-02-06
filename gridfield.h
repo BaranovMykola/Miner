@@ -8,8 +8,8 @@
 
 #include "cell.h"
 
-const int Width = 20;
-const int Height = 20;
+const int Width = 10;
+const int Height = 10;
 
 class GridField : public QWidget
 {
@@ -30,6 +30,8 @@ public slots:
     void slotMine();
     void slotClickReleased();
 private:
+    void recursiveOpen(int w, int h);
+    void recursiveProxy(int w, int h);
     bool isCorrect(int w, int h);
     std::pair<int, int> getPosition(Cell* _cell);
     std::vector<std::vector<Cell*>> cells;

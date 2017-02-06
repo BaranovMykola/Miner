@@ -60,7 +60,9 @@ public slots:
     void slotAnimationOff();
     void slotMouseClickReleased();
 private:
+    bool isEmpty();
     void updateGrpahic();
+    void stepWithoutSignals();
 
     ImageType mTypeCell;
     bool mMine;

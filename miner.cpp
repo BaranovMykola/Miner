@@ -6,11 +6,13 @@
 
 Miner::Miner(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::Miner)
+    ui(new Ui::Miner),
+    mMineField(this),
+    mSun(mMineField, this)
 {
     ui->setupUi(this);
 //    this->setWindowFlags(this->windowFlags() | Qt::MSWindowsFixedSizeDialogHint);
-    mMineField.setMine(10);
+    mMineField.setMine(3);
     ui->fieldBox->addLayout(mMineField.getField());
     connect(&mMineField, &GridField::loose, [this](){slotUpdateSunImage(SunType::ExplodedSun);});
     connect(&mMineField, &GridField::mouseClicked, [this](){slotUpdateSunImage(SunType::Kiss);});

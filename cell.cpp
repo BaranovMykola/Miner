@@ -4,6 +4,7 @@
 #include <QEvent>
 #include <QMouseEvent>
 
+#include "steppedcellstate.h"
 
 Cell::Cell(QWidget *parent) :
     AbstractCell(parent),
@@ -119,6 +120,14 @@ void Cell::slotMouseClickReleased()
 void Cell::updateGrpahic()
 {
     AbstractCell::updateGrpahic(GraphicsFile.at(mTypeCell));
+}
+
+void Cell::stepWithoutSignals()
+{
+    state.reset();
+    state = std::make_unique<SteppedCellState>(SteppedCellState());
+    resizeCell(RealCellSize);
+    open();
 }
 
 

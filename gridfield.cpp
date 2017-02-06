@@ -5,6 +5,7 @@
 
 #include <ctime>
 #include <iterator>
+//#include <QCoreApplication>
 
 #include "steppedcellstate.h"
 
@@ -108,7 +109,34 @@ void GridField::resetGridField(int minesCount)
 
 void GridField::slotStepOn(int w, int h)
 {
-    emit mouseClicked();
+    try
+    {
+        if(isCorrect(w,h))
+        {
+            emit mouseClicked();
+            qDebug() << "Opening w: " << w << " h: " << h
+                     << " mMineBeside: " << cells[w][h]->mMineBeside
+                     << " isMine(): " << cells[w][h]->isMine()
+                     << " Basic: " << (cells[w][h]->mTypeCell == ImageType::Basic);
+            if(cells[w][h]->mMineBeside == 0 && !cells[w][h]->isMine() && cells[w][h]->mTypeCell == ImageType::Basic)
+            {
+                qDebug() << "\t Open...";
+                recursiveProxy(w,h);
+            }
+            else
+            {
+                qDebug() << "\t Not opening...";
+            }
+        }
+        else
+        {
+            qDebug() << "Incorrect w: " << w << " h: " << h;
+        }
+    }
+    catch(...)
+    {
+        qDebug() << "[ERROR] UNHANDLED EXCEPTION";
+    }
 }
 
 void GridField::slotMine()
@@ -138,6 +166,47 @@ void GridField::slotMine()
 void GridField::slotClickReleased()
 {
     emit mouseCLickReleased();
+}
+
+void GridField::recursiveOpen(int w, int h)
+{
+    cells[w][h]->stepWithoutSignals();
+    if(isCorrect(w,h+1) && cells[w][h+1]->mTypeCell == ImageType::Basic && cells[w][h]->mTypeCell == ImageType::Empty)
+    {
+        recursiveOpen(w, h+1);
+    }
+    if(isCorrect(w,h-1) && cells[w][h-1]->mTypeCell == ImageType::Basic && cells[w][h]->mTypeCell == ImageType::Empty)
+    {
+        recursiveOpen(w, h-1);
+    }
+    if(isCorrect(w+1,h) && cells[w+1][h]->mTypeCell == ImageType::Basic && cells[w][h]->mTypeCell == ImageType::Empty)
+    {
+        recursiveOpen(w+1, h);
+    }
+    if(isCorrect(w-1,h) && cells[w-1][h]->mTypeCell == ImageType::Basic && cells[w][h]->mTypeCell == ImageType::Empty)
+    {
+        recursiveOpen(w-1, h);
+    }
+}
+
+void GridField::recursiveProxy(int w, int h)
+{
+    if(isCorrect(w,h+1) && cells[w][h+1]->mTypeCell == ImageType::Basic)
+    {
+        recursiveOpen(w, h+1);
+    }
+    if(isCorrect(w,h-1) && cells[w][h-1]->mTypeCell == ImageType::Basic)
+    {
+        recursiveOpen(w, h-1);
+    }
+    if(isCorrect(w+1,h) && cells[w+1][h]->mTypeCell == ImageType::Basic)
+    {
+        recursiveOpen(w, h+1);
+    }
+    if(isCorrect(w-1,h) && cells[w-1][h]->mTypeCell == ImageType::Basic)
+    {
+        recursiveOpen(w-1, h);
+    }
 }
 
 bool GridField::isCorrect(int _w, int _h)

@@ -2,9 +2,10 @@
 
 #include <QDebug>
 
-Sun::Sun(QWidget *parent):
+Sun::Sun(GridField& field, QWidget *parent):
     AbstractCell(parent),
-    mType(SunType::BasicSun)
+    mType(SunType::BasicSun),
+    mField(field)
 {
     updateGrpahic();
 }
@@ -20,13 +21,13 @@ void Sun::setEnabled(bool enabled)
     {
         connect(this, SIGNAL(mouseHovered()), this, SLOT(slotAnimationOn()), Qt::UniqueConnection);
         connect(this, SIGNAL(mouseReleased()), this, SLOT(slotAnimaionOff()), Qt::UniqueConnection);
-//        connect(this, SIGNAL(mouseClickedMineButton()), this, SLOT(slotRestart()), Qt::UniqueConnection);
+        connect(this, SIGNAL(mouseClickedMineButton()), this, SLOT(slotRestart()), Qt::UniqueConnection);
     }
     else
     {
         disconnect(this, SIGNAL(mouseHovered()), this, SLOT(slotAnimationOn()));
         disconnect(this, SIGNAL(mouseReleased()), this, SLOT(slotAnimaionOff()));
-//        disconnect(this, SIGNAL(mouseClickedMineButton()), this, SLOT(slotRestart()));
+        disconnect(this, SIGNAL(mouseClickedMineButton()), this, SLOT(slotRestart()));
     }
 }
 
@@ -36,10 +37,18 @@ void Sun::setImage(SunType type)
     updateGrpahic();
 }
 
-void Sun::slotRestart(GridField &field, const int count)
+void Sun::slotRestart()
 {
-    field.resetGridField(count);
+    mField.resetGridField(10);
+    mType = SunType::BasicSun;
+    updateGrpahic();
+    setEnabled(false);
 }
+
+//void Sun::slotRestart(GridField &field, const int count)
+//{
+////    field.resetGridField(count);
+//}
 
 void Sun::slotAnimationOn()
 {

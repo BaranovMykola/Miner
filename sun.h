@@ -21,16 +21,18 @@ class Sun : public AbstractCell
 {
     Q_OBJECT
 public:
-    explicit Sun(QWidget* parent = 0);
+    explicit Sun(GridField& field, QWidget* parent = 0);
     void updateGrpahic();
     void setEnabled(bool enabled);
     void setImage(SunType type);
 public slots:
-    void slotRestart(GridField& field, const int count);
+    void slotRestart();
+//    void slotRestart(GridField& field, const int count);
     void slotAnimationOn();
     void slotAnimaionOff();
 private:
     SunType mType;
+    GridField& mField;
 };
 
 #endif // SUN_H
